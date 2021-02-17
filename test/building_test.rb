@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/building'
 require './lib/apartment'
 require './lib/renter'
+require 'pry'
 
 class BuildingTest < Minitest::Test
   def test_it_exists
@@ -30,16 +31,20 @@ class BuildingTest < Minitest::Test
     assert_equal [unit1, unit2], building.units
   end
 
-  def test_add_renters
+  def test_add_renter
     building = Building.new
 
     renter1 = Renter.new("Aurora")
     unit1 = Apartment.new({number: "A1", monthly_rent: 1200, bathrooms: 1, bedrooms: 1})
     unit1.add_renter(renter1)
+    building.add_unit(unit1)
 
     renter2 = Renter.new("Tim")
     unit2 = Apartment.new({number: "B2", monthly_rent: 999, bathrooms: 2, bedrooms: 2})
     unit2.add_renter(renter2)
+    building.add_unit(unit2)
+
+    building.add_renters
 
     assert_equal ["Aurora", "Tim"], building.renters
   end
@@ -50,6 +55,8 @@ class BuildingTest < Minitest::Test
     unit1 = Apartment.new({number: "A1", monthly_rent: 1200, bathrooms: 1, bedrooms: 1})
     unit2 = Apartment.new({number: "B2", monthly_rent: 999, bathrooms: 2, bedrooms: 2})
 
+    building.add_unit(unit1)
+    building.add_unit(unit2)
 
     assert_equal 1099.5, building.average_rent
   end
