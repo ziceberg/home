@@ -1,9 +1,10 @@
 class Building
-  attr_reader :units, :renters
+  attr_reader :units, :renters, :rented_units
 
   def initialize
     @units = []
     @renters = []
+    @rented_units = []
   end
 
   def add_unit(unit)
@@ -17,6 +18,6 @@ class Building
   end
 
   def average_rent
-      (@units[0].monthly_rent + @units[1].monthly_rent).to_f / 2
+    (@units[0].monthly_rent + @units[1].monthly_rent).to_f / 2
   end
 end
