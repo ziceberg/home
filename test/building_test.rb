@@ -79,6 +79,9 @@ class BuildingTest < Minitest::Test
     assert_equal [], building.rented_units
 
     unit2.add_renter(renter1)
+    building.add_rented_units
+
+    # binding.pry
 
     assert_equal [unit2], building.rented_units
   end
